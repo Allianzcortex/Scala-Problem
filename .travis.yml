@@ -1,0 +1,12 @@
+language: scala
+scala:
+   - 2.12.2
+branches:
+  only:
+    - master
+notifications:
+  email:
+    recipients:
+      - iamwanghz@gmail.com
+jdk:
+  - oraclejdk8
