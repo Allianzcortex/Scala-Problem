@@ -9,7 +9,7 @@
 
 Scala99:[Solution](src/main/scala/com/leetcode/String/Scala99.scala)
 
-#### scala-test 和 junit 集成
+#### scala-test 和 junit 集成问题
 
 - 单纯用 Intellij IDEA + JUnit 可以在本地 IDEA 上跑测试用例，但用 `sbt test` 命令行测试的话会提 **no tests are executed**
 
