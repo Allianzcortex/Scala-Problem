@@ -1,5 +1,5 @@
 
-#### Leetcode Solution With Scala ![build-pass](https://travis-ci.org/Allianzcortex/Scala-LeetCode.svg?branch=master)
+#### Leetcode Solution With Scala ![build-pass](https://travis-ci.org/Infra-Intern/Scala-LeetCode.svg?branch=master)
 
 
 | ID | Problem  | Solution | TestCase |
