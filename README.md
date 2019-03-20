@@ -1,6 +1,5 @@
 
-#### Leetcode Solution With Scala ![build-pass](https://travis-ci.org/Infra-Intern/Scala-LeetCode.svg?branch=master)
-
+#### Leetcode Solution With Scala [![Build Status](https://travis-ci.org/Infra-Intern/Scala-Problem.svg?branch=master)](https://travis-ci.org/Infra-Intern/Scala-Problem)
 
 | ID | Problem  | Solution | TestCase |
 | -- | ------------- | ------------- | ------------- |
