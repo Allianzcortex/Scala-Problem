@@ -5,7 +5,7 @@ package com.leetcode.String
   */
 class ReverseVowelsOfAString_345 {
 
-  // TODO 这里怎么用 Scala 的方式来解决，感觉很难做到
+  // TODO use a more classfic scala way
   def reverseVowels1(input: String): String = {
     if (input == null || input.isEmpty)
       input

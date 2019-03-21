@@ -28,7 +28,7 @@ class BinaryTreePaths_257 {
     println(testMap.keys)
     println(testMap(1)) // a
 
-    // 对字符串处理
+    // process string
     val s = "Hello World"
     println(s.indexOf("H")) // 0
 
@@ -38,7 +38,6 @@ class BinaryTreePaths_257 {
 
   }
 
-  // 使用 try-catch 来处理异常
   def readTextFile(filename: String): Option[List[String]] = {
     try {
       Some(io.Source.fromFile(filename).getLines().toList)

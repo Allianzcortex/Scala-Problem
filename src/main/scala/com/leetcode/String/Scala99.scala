@@ -5,7 +5,7 @@ package com.leetcode.String
   */
 class Scala99 {
 
-  // 第一道题，求最后一个元素
+  // Problem1 : find last item
   def lastBuildin[A](l: List[A]): A = l match {
     // solution1  l(l.size-1)
     // solution2 l.last
@@ -15,9 +15,9 @@ class Scala99 {
     case _ => throw new IllegalArgumentException("no")
   }
 
-  // 第二道题
+  // Problem2
   def lastButOneElement[A](l: List[A]): A = l match {
-    // 有一种解法是直接返回
+    // 
     // if (l.isEmpty) throw new No...
     // else l.init.last
     case h :: _ :: Nil => h
@@ -25,8 +25,7 @@ class Scala99 {
     case _ => throw new NoSuchElementException
   }
 
-  // 第三道题，求第 k 个h _ ::一会需要重新做这道题
-  // 这道题还是有问题，
+  // Problem3 : kth h value
   //  def nth[A](n: Int, l: List[A]): A = (n, l) match {
   //    // if(n>=0） l(n)
   //    // else throw new no...
@@ -36,51 +35,47 @@ class Scala99 {
   //
   //  }
 
-  // 第四道题，求解长度
+  // Problem4 : find length
   def length[A](l: List[A]): Int = l match {
     case Nil => 0
     case _ :: tail => length(tail) + 1
-    // 同样可以用 l.foldLeft(0) { (c, _) => c + 1 } 来求解
+    //  l.foldLeft(0) { (c, _) => c + 1 } is also available
   }
 
-  // 第五道题，逆转字符串
+  // Problem 5 :reverse the string
   def reverseList[A](l: List[A]): List[A] = l match {
-    // 可以直接返回 l.reverse
+    // return l.reverse .... drectly
     case Nil => l
     case head :: tail => reverseList(tail) ::: List(head)
   }
 
-  // 第六道题，是否是回文字串
+  // Problem 6: aba=aba(reversed),while abc!=cba
   def isPlaindromw[A](l: List[A]): Boolean = {
-    // 可以直接用 l == l.reverse
+    // return l == l.reverse
     if (l.isEmpty) {
       println("--")
-      return true // 为什么要用 return 来返回啊。。应该可以直接用 true 的
+      return true // 
     }
     println(l)
-    // 开始写的是 l(0)==l(l.size-1) 写的不好
+    // l(0)==l(l.size-1) is not a good practice
     l.length == 1 || (l.head == l.last && isPlaindromw(l.slice(1, l.size - 1)))
   }
 
-  // 第七道题，那 nested list 转平
-  // 这里用泛型也可以吧？和用 any 区别？
+  // Problem 7: nested list
   def flatten(ls: List[Any]): List[Any] = ls flatMap {
     case ms: List[_] => flatten(ms)
     case elem => List(elem)
   }
 
-  // 第八道题，去除重复元素
+  // Problem8: remove duplicate elementes
   def removeDuplicateElem(ls: List[Any]): List[Any] = ls match {
-    // 可以这样用 ls.toSet.toList
-    // 当然也可以这样ls.distinct
-    // TODO 但为什么这条语句不对 ls.filter(x=>ls.count(x)==1)
+    // return ls.toSet.toList or ls.distinct
     case Nil => Nil
     case head :: tail => head :: removeDuplicateElem(ls.dropWhile(_ == head))
 
   }
 
-  // 第九道题 分类元素
-  // 如果用 partition 是否会有更好的方法
+  // Probelm9 : Classify
   //  def pack(ls: List[Any]): List[List[Any]] = {
   //    if (ls.isEmpty)
   //      List(List())
@@ -88,10 +83,8 @@ class Scala99 {
   //    ls.partition(_ == 1)
   //  }
 
-  // 第十题，计算 List 中元素与出现的次数
+  // Problem 10 : return appearence frequency
   def encode[A](ls: List[A]): List[(A, Int)] = {
-    // 下面才是正确的定义方式，而非
-    // scala.collection.mutable.Map[(A,Int)]
     val count = scala.collection.mutable.Map[A, Int]()
     for (elem <- ls.distinct) {
       count.put(elem, ls.count(_ == elem))
@@ -99,7 +92,7 @@ class Scala99 {
     count.toList
   }
 
-  // 第十一题 和第十题的意思类似
+  // Problem 11 : same like Problem 10
   def encodeModified[A](ls: List[A]): List[(A, Int)] = {
     val count = scala.collection.mutable.Map[A, Int]()
     for ((elem, index) <- ls.zipWithIndex) {
@@ -108,11 +101,10 @@ class Scala99 {
       else {
         println(count)
         if (elem == count.last._1)
-        // map 的 get 方法返回的是 Option[Int]，用 getOrElse 转化为 Int
+        // like `Optional` in Java 8 ,get() method in map will return Option[Int]
+        // using getOrElse() to return int value
           count.update(elem, count.getOrElse(elem, 0) + 1)
         else
-        // 一个 Map 只能有 key，所以自己这里的逻辑不应该这么写，或者不应该用 Map 来做
-        // TODO 功能没有实现
           count.put(elem, 1)
 
       }
@@ -120,101 +112,68 @@ class Scala99 {
     count.toList
   }
 
-  // 第十二题
+  // Probelm 12 :
   /*
     scala> decode(List((4, 'a), (1, 'b), (2, 'c), (2, 'a), (1, 'd), (4, 'e)))
     res0: List[Symbol] = List('a, 'a, 'a, 'a, 'b, 'c, 'c, 'a, 'a, 'd, 'e, 'e, 'e, 'e
-    这个问题自己实现的最后结果不是自己想要的
-    TODO
    */
   def reArrangeList[A](ls: List[(Int, A)]): List[List[A]] = {
-    // 关于 flatMap 和 case 这个问题，参考：http://stackoverflow.com/questions/22944468/using-tuples-in-map-flatmap-partial-functions
+    // Issue about  flatMap and case ：
+    // refer : http://stackoverflow.com/questions/22944468/using-tuples-in-map-flatmap-partial-functions
     ls.flatMap(tp =>
       for (index <- 1 to tp._1)
         yield List(tp._2)
     )
   }
 
-  // 第十三题
-  // 完全逆转，还是类似的思路，这道题就不做了
+  // Problem 13 : the same thought
   def reverseReArrange(): Unit = {
 
   }
 
-  // 第十四题，第十五题思路也是类似的
-  // 为每个元素增加一个副本，思路很清晰啊
+ // Problem 14&15 : using default api 
   def duplicate(ls: List[Any]): List[Any] = {
     ls.flatMap(elem => List(elem, elem))
   }
 
-  // 第十六题
+  // Problem 16
   def dropEveryNthElement[A](n: Int, ls: List[A]): List[A] = {
-    // filter 只过滤满足要求的条件，如 List(1,2).filter(_==1) 得到的结果为 1
-    // scala99 上还提供了用 case :: Nil 这种求解方法，但太复杂了，没必要看
     ls.zipWithIndex.filter(elem => (elem._2 + 1) % n != 0).map(_._1)
   }
 
-  // 第十七题
+  // Problem 17
   def splitToTwoPart[A](n: Int, ls: List[A]) = {
-    // 下面这个是我的实现方式
     val s = ls.zipWithIndex.partition(elem => elem._2 + 1 <= n)
     (s._1.map(x => x._1), s._2.map(x => x._1))
 
-    // 还有更好用的
-    // 直接用 ls.splitAt(n) 后者 (ls.take(n),ls.drop(n))
+    // we can also use ls.splitAt(n) and (ls.take(n),ls.drop(n))
   }
 
-  // 第十八题，要求 Extract a slice from a list.
-  // 直接用 ls.slice(start,end) 就可以了 [)
-  // 非要用 case() 就是...
-
-
-  // 第十九章 ... 后续一直
-
-  // 下面开始 Arithmetic 章节部分
-  // 第 31 部分
+  //  Arithmetic Part
+  // Part 31
   def isPrime(num: Int): Boolean = {
     num > 1 && (2 to math.sqrt(num).toInt).toList.forall(x => num % x != 0)
-    // 这个思路倒不难，但这里问题挺大的，有一个 inc
     /*
     scala> (1 to 3).toList
-res19: List[Int] = List(1, 2, 3)
+    res19: List[Int] = List(1, 2, 3)
 
-scala> List(1 to 3)
-res20: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3))
+    scala> List(1 to 3)
+    res20: List[scala.collection.immutable.Range.Inclusive] = List(Range(1, 2, 3))
 
-后者不能用 forall 以及其他函数
-还有 sqrt() 后是浮点数，要用 toInt 转为整形
+    the result of sqrt() is float value, needed to be converted to int by toInt() method
      */
 
     // List(1, 2, 3).forall(x => x < 3)
   }
 
-  // 第三十二道题
-  // 嗯哼
+  // Probelm 32
   def gcd(x: Int, y: Int): Int = {
     if (y == 0) x
     else gcd(y, x % y)
   }
 
-  // 第三十三题，完全没有意思啊，就是按照它的说明
-  // coprime 就是两个数的最大公约数为 1
-
-  // 接下来的 34 -41 都太偏数学了
-  // 没有 42-45 部分
-
-  // 第 46 部分 Logic and Codes
-
-  // 第四十六题，太 tricky 了 48-50 基本也是同样道理
-
-
-  // 之后的部分有的是 LeetCode，有的是太复杂了，各种泛型，就没有看的必要了
-  // 来写一个二叉树
-
-
 }
 
-// 如果不用 abstract，在另一个新的 class 里建立同名类，会不会好点
 class TreeNode {
   var value: Int = 1
   var left: TreeNode = null
@@ -251,13 +210,13 @@ object testApp extends App {
   println(s.isPrime(7))
   println(s.gcd(2, 6))
 
-  // 测试 TreeNode
+  // test TreeNode
   var root = new TreeNode(1)
   root.left = new TreeNode(2)
   root.right = new TreeNode(3)
   root.left.left = new TreeNode(4)
 
-  // 计算 Depth
+  // calculate Depth
 
   def calDepth(root: TreeNode): Int = {
     if (root == null)
@@ -266,7 +225,5 @@ object testApp extends App {
   }
 
   println(calDepth(root))
-
-  // 对 Scala 的整体理解已经可以了，接下来再多一点对类的处理就好了 case class ,object,trait ...
 
 }
